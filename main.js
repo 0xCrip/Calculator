@@ -52,5 +52,5 @@ btnClear.addEventListener('click', () => {
 
 btnRes.addEventListener('click', () => {
     const result = operate(oper, parseInt(num1), parseInt(num2))
-    outputBox.textContent = outputBox.textContent + " = " + result
+    outputBox.textContent = result
 })
