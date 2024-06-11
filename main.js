@@ -8,9 +8,7 @@ function operate(operator, x, y) {
         return x + y
     } else if (operator === "-") {
         return x - y
-    }else if (operator === "x") {
-        return x * y
-    } else if (operator === "X") {
+    }else if (operator === "×") {
         return x * y
     } else {
         return x / y
@@ -30,8 +28,9 @@ numberButtons.forEach(button => {
         output.textContent = outputBox.textContent + button.textContent
         if (oper === null) {
             num1 = num1 + button.textContent
-        } else if (oper != null) {
-            num2 = button.textContent
+        } else {
+            num1 = Number(num1)
+            num2 = Number(button.textContent)
         }
     })
 })
@@ -52,6 +51,6 @@ btnClear.addEventListener('click', () => {
 })
 
 btnRes.addEventListener('click', () => {
-    const result = operate(oper, num1, num2)
+    const result = operate(oper, parseInt(num1), parseInt(num2))
     outputBox.textContent = outputBox.textContent + " = " + result
 })
