@@ -1,39 +1,20 @@
-function addNum(num1, num2) {
-    let res = num1 + num2
-    outputBox.textContent = outputBox.textContent + " = " + res
-}
-
-function subtractNum(num1, num2) {
-    let res = num1 - num2
-    outputBox.textContent = outputBox.textContent + " = " + res
-}
-
-function multiplyNum(num1, num2) {
-    let res = num1 * num2
-    outputBox.textContent = outputBox.textContent + " = " + res
-}
-
-function divideNum(num1, num2) {
-    let res = num1 / num2
-    outputBox.textContent = outputBox.textContent + " = " + res
-}
-
 let inputCount = 0
-let oper
-let num1 = 0 
+let oper = null
+let num1 = ""
 let num2 = 0
 
-function operate(operator, num1, num2) {
-    if (operator == "+") {
-        addNum(num1, num2);
-    } else if (operator == "-") {
-        subtractNum(num1, num2);
-    }else if (operator == "x") {
-        operator = "*";
-        multiplyNum(num1, num2);
+function operate(operator, x, y) {
+    if (operator === "+") {
+        return x + y
+    } else if (operator === "-") {
+        return x - y
+    }else if (operator === "x") {
+        return x * y
+    } else if (operator === "X") {
+        return x * y
     } else {
-        divideNum(num1, num2)
-    };
+        return x / y
+    }
 }
 
 // This contains all the events for the buttons
@@ -47,10 +28,10 @@ numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         inputCount++
         output.textContent = outputBox.textContent + button.textContent
-        if (inputCount == 1) {
-            num1 = parseInt(button.textContent)
-        } else {
-            num2 = parseInt(button.textContent)
+        if (oper === null) {
+            num1 = num1 + button.textContent
+        } else if (oper != null) {
+            num2 = button.textContent
         }
     })
 })
@@ -64,16 +45,13 @@ operButtons.forEach(button => {
 
 btnClear.addEventListener('click', () => {
     inputCount = 0
-    oper = undefined
-    num1 = undefined
-    num2 = undefined
+    oper = null
+    num1 = ""
+    num2 = 0
     outputBox.textContent = ""
-    console.log("Calculator Cleared")
 })
 
 btnRes.addEventListener('click', () => {
-    console.log(oper + " " + num1 + " " + num2)
-
-    
-    operate(oper, num1, num2)
+    const result = operate(oper, num1, num2)
+    outputBox.textContent = outputBox.textContent + " = " + result
 })
